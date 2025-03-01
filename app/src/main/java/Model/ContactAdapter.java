@@ -1,11 +1,14 @@
 package Model;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         this.context = context;
         this.contacts = contacts;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -34,14 +38,17 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         TextView idTextView = convertView.findViewById(R.id.contactId);
         TextView nameTextView = convertView.findViewById(R.id.contactName);
         TextView phoneTextView = convertView.findViewById(R.id.contactPhone);
-        TextView favoriteTextView = convertView.findViewById(R.id.contactFavorite);
+        ImageView imageView = convertView.findViewById(R.id.imageView3);
 
         if (contact != null) {
             idTextView.setText("ID: " + contact.getId());
             nameTextView.setText(contact.getName());
             phoneTextView.setText(contact.getPhone());
-            favoriteTextView.setText(contact.isFavorite() ? "Yêu thích" : "");
             checkBox.setChecked(contact.isFavorite());
+            // Set the image
+            if (contact.getImage() != null) {
+                imageView.setImageURI(Uri.parse(contact.getImage()));
+            }
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 contact.setFavorite(isChecked);
@@ -53,6 +60,4 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 
         return convertView;
     }
-
-
 }

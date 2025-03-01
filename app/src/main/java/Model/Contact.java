@@ -7,6 +7,9 @@ public class Contact implements Serializable {
     private String phone;
     private boolean isFavorite;
     private int id;
+    //link anh
+    private String image;
+
 
     // Constructor
     public Contact(String name, String phone, boolean isFavorite, int id) {
@@ -50,5 +53,11 @@ public class Contact implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 }
